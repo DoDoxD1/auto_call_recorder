@@ -7,6 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bgicon">#ffffff</color>
-    <color name="text">#805E5E5E</color>
+    <color name="bgicon">#353535</color>
+    <color name="text">#DFDFDF</color>
 </resources>

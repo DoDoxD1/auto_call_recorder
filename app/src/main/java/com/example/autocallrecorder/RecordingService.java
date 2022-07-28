@@ -37,30 +37,30 @@ public class RecordingService extends Service {
         Log.i("aunu", "saveLayout: "+format.toString());
         File file = new File(root+"/Download");
         rec = new MediaRecorder();
-        rec.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
-        rec.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        rec.setOutputFile(file.getAbsoluteFile() + "/Readymotive" + format + "rec.3gp");
-        rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
         TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
         manager.listen(new PhoneStateListener() {
             @Override
             public void onCallStateChanged(int state, String phoneNumber) {
                 super.onCallStateChanged(state, phoneNumber);
-
-                if (TelephonyManager.CALL_STATE_IDLE == state && rec == null) {
+                if (TelephonyManager.CALL_STATE_OFFHOOK == state) {
                     rec.stop();
                     rec.reset();
                     rec.release();
                     recordStarted = false;
                     stopSelf();
-                } else if (TelephonyManager.CALL_STATE_OFFHOOK == state) {
+                } else if (TelephonyManager.CALL_STATE_IDLE == state) {
+                    rec.setAudioSource(MediaRecorder.AudioSource.VOICE_COMMUNICATION);
+                    rec.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+//                    rec.setAudioEncodingBitRate(16);
+//                    rec.setAudioSamplingRate(44100);
+                    rec.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    rec.setOutputFile(file.getAbsoluteFile() + "/Readymotive" + format + "rec.amr");
                     try {
                         rec.prepare();
-                        rec.start();
                     } catch (Exception e) {
                         Log.i("aunu", "onCallStateChanged: " + e);
                     }
+                    rec.start();
                     recordStarted = true;
                 }
             }

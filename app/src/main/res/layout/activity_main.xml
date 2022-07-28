@@ -27,7 +27,7 @@
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Call Recorder"
-                android:textColor="#808080"
+                android:textColor="@color/text"
                 android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
                 android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="#ffffff"
+                android:background="@color/bgicon"
                 android:src="@drawable/ic_baseline_help_outline_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
